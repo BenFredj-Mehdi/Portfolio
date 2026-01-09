@@ -93,3 +93,64 @@ select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8p
 /* small utilities */
 .hero-cta{display:flex;gap:12px}
 .brand, .tagline, .card h3{user-select:none}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e6f0ff;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #000000;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form .btn {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
