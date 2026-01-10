@@ -15,7 +15,7 @@ body{
 
   /* Layered background: dark gradient overlay on top, and a tiled image underneath.
      The gradient (first layer) covers the viewport; the second layer (image) repeats. */
-  background-image: linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,3,5,0.75)), url('images/background.jfif');
+  background-image: linear-gradient(180deg, rgba(2,6,23,0.65), rgba(2,3,5,0.75)), url('Images/Background.jfif');
   background-size: cover, auto;
   background-position: center center, 0 0;
   background-repeat: no-repeat, repeat;
