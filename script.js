@@ -41,4 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
       else p.style.display = 'none';
     });
   });
+
+  // Contact form submission with Web3Forms
+  const contactForm = document.getElementById('contact-form');
+  const confirmationMessage = document.getElementById('confirmation-message');
+  
+  contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    try {
+      const formData = new FormData(contactForm);
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        contactForm.style.display = 'none';
+        confirmationMessage.classList.remove('confirmation-hidden');
+        confirmationMessage.scrollIntoView({behavior: 'smooth', block: 'center'});
+      } else {
+        alert('There was an error sending your message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('There was an error sending your message. Please try again.');
+    }
+  });
 });

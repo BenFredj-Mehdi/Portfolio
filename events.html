@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Events — Mehdi Ben Fredj</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <div class="nav-left">
+          <a class="brand" href="index.html">Mehdi B.F.</a>
+          <a class="nav-events" href="events.html">Events</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cybersecurity.html">Cybersecurity</a></li>
+          <li><a href="cloud.html">Cloud</a></li>
+          <li><a href="devops.html">DevOps</a></li>
+          <li><a href="ai.html">AI</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <h1>Events</h1>
+        <p>Highlights of conferences, workshops, and meetups I attended.</p>
+      </section>
+
+      <section class="section">
+        <div class="grid cert-grid" id="events-list">
+          <article class="card reveal visible">
+            <h3>Sample Event</h3>
+            <p class="issuer">Organizer Name <span class="meta">Date</span></p>
+            <p>Short description of the event, key sessions attended, and takeaways.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container"><p><a href="index.html" class="brand">← Back</a></p></div>
+    </footer>
+
+    <div id="modal" class="modal" aria-hidden="true"><div class="modal-content"><button class="modal-close">✕</button><div id="modal-body"></div></div></div>
+    <script src="script.js"></script>
+  </body>
+</html>

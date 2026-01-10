@@ -31,7 +31,10 @@
     </div>
     <header class="site-header">
       <nav class="nav container">
-        <a class="brand" href="index.html">Mehdi B.F.</a>
+        <div class="nav-left">
+          <a class="brand" href="index.html">Mehdi B.F.</a>
+          <a class="nav-events" href="events.html">Events</a>
+        </div>
         <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
         <ul class="nav-list">
           <li><a href="index.html">Home</a></li>
@@ -43,6 +46,9 @@
       </nav>
       <section class="hero container">
         <div class="hero-grid">
+          <div class="hero-image">
+            <img src="Images/Mehdi.png" alt="Mehdi Ben Fredj" class="profile-img" />
+          </div>
           <div class="hero-main">
             <h1 class="name">Mehdi Ben Fredj</h1>
             <p class="tagline">IT Engineering student with strong expertise across Cybersecurity, Cloud, DevOps, and AI. I design secure systems, build scalable cloud architectures, automate infrastructure, and prototype intelligent models.</p>
@@ -52,9 +58,10 @@
               <a class="btn" href="devops.html">DevOps</a>
               <a class="btn" href="ai.html">AI</a>
             </div>
+            <div class="hero-cta secondary-cta">
+              <a class="btn btn-events" href="events.html">Events</a>
+            </div>
           </div>
-
-
         </div>
       </section>
     </header>
@@ -149,27 +156,31 @@
 
       <section id="contact" class="section container">
         <h2>Contact Me</h2>
-        <form class="contact-form" id="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="first-name">First Name</label>
-              <input type="text" id="first-name" name="first-name" required />
+        <div id="contact-container">
+          <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="d793a97d-ed75-4977-9e94-e06428782cfc">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
             </div>
             <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" id="last-name" name="last-name" required />
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
             </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+          <div id="confirmation-message" class="confirmation-hidden">
+            <h3>✓ Submission Confirmed!</h3>
+            <p>Thank you for reaching out! Your message has been sent successfully. I'll get back to you soon.</p>
+            <button class="btn" onclick="document.getElementById('contact-form').style.display = 'block'; document.getElementById('contact-form').reset(); document.getElementById('confirmation-message').classList.add('confirmation-hidden');">Send Another Message</button>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn">Send Message</button>
-        </form>
+        </div>
       </section>
     </main>
 
