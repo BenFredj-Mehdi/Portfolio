@@ -1,0 +1,47 @@
+/* Mobile-only stylesheet loaded with media="(max-width: 720px)" */
+
+/* Layout */
+.container { padding: 16px; }
+.hero-grid { flex-direction: column; gap: 10px; }
+.hero-image { justify-content: center; }
+.profile-img { max-width: 180px; }
+.name { font-size: 30px; }
+.tagline { font-size: 14px; }
+
+/* Navigation */
+.nav-toggle { display: inline-block; }
+.nav-left { gap: 10px; }
+.nav-list { 
+  display: none; 
+  flex-direction: column; 
+  gap: 10px; 
+  position: absolute; 
+  right: 16px; 
+  top: 60px; 
+  background: rgba(0,0,0,0.35); 
+  padding: 12px; 
+  border-radius: 10px; 
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Hero CTAs */
+.hero-cta { flex-direction: column; gap: 10px; }
+.hero-cta .btn { width: 100%; text-align: center; padding: 12px; }
+.secondary-cta { width: 100%; margin-top: 10px; }
+
+/* Cards and grids */
+.grid, .cert-grid { grid-template-columns: 1fr; gap: 12px; }
+.card { padding: 16px; }
+.badge-img { width: 120px; }
+.cert-links { gap: 10px; }
+
+/* Contact form */
+.contact-form { max-width: 100%; }
+.form-row { grid-template-columns: 1fr; }
+.form-group input, .form-group textarea { font-size: 15px; }
+
+/* Footer */
+.site-footer { padding: 16px 0 40px; }
+
+/* Visual declutter on mobile */
+.badge-field { display: none; }

@@ -1,42 +1,56 @@
 # Mehdi Ben Fredj — IT Engineering Portfolio
 
-This is a small static portfolio template (dark IT-themed) to introduce yourself. It includes sections for Competitions, Certifications, Cursus, and Projects, plus simple dynamic features (filtering, modal, reveal-on-scroll).
+A personal portfolio built as a fast, responsive static website showcasing education, experience, certifications, projects, and competitions — with a contact form that sends real emails.
 
-Quick start (Windows PowerShell):
+## Tech Stack
+- HTML, CSS, JavaScript (no framework)
+- Web3Forms (free plan) for the contact form email delivery
+- Chatbase.co (personal chatbot integration — coming soon)
+- AWS (static hosting — coming soon)
+
+## Features
+- Hero section with portrait, quick category buttons (Cybersecurity, Cloud, DevOps, AI) and an Events button
+- Certifications pages with "View credential" and "View certification" buttons
+- Smooth scroll, reveal-on-scroll animations, simple project filter
+- Mobile-friendly layout and navigation
+
+## Structure
+- `index.html` — Home
+- `cybersecurity.html`, `cloud.html`, `devops.html`, `ai.html` — category pages
+- `events.html` — attended events (new category)
+- `styles.css` — theme and layout
+- `script.js` — interactions (nav toggle, smooth scroll, reveal, filters)
+- `Images/` — assets (note the capital `I`)
+
+## Contact Form (Web3Forms)
+The contact form posts to `https://api.web3forms.com/submit` using an `access_key` (free plan). After submission, the site shows a confirmation message. No backend is needed.
+
+## Run Locally
+Open `index.html` directly, or serve the folder:
 
 ```powershell
-# Open locally in your browser (double-click `index.html`), or run a simple server:
-# If you have Python 3 installed:
+# Python 3
 python -m http.server 8000; Start-Process "http://localhost:8000"
 
-# Or with PowerShell's built-in Serve (if available):
-# Serve-PS -Port 8000
+# Or any static server
+# npx serve .
 ```
 
-Files:
-- `index.html` — main page
-- `styles.css` — dark theme and layout
-- `script.js` — interactivity (nav, scroll reveal, filter, modal)
+## Deployment Notes
+- Case-sensitive paths matter in production (Linux hosts). Assets live under `Images/...` — ensure references use the same capitalization.
+- If CSS changes don’t appear after deployment, hard refresh (Ctrl+F5) or temporarily add `?v=2` to `styles.css` in HTML to bust cache.
 
-New pages:
-- `cybersecurity.html` — certifications and projects for Cybersecurity
-- `cloud.html` — certifications and projects for Cloud
-- `devops.html` — certifications and projects for DevOps
-- `ai.html` — certifications and projects for AI
+## Mobile Version
+This project includes a dedicated mobile stylesheet `mobile.css` loaded only on small screens via:
+`<link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />`
 
-How to customize:
-- Replace placeholder cards under each section with your real content.
-- Add images/screenshots to projects and update the modal HTML in `script.js`.
-- Change colors in `styles.css` at the `:root` variables to adjust the theme.
+Mobile improvements:
+- Tidy stacked navigation with a toggle
+- Portrait centered and sized for small screens
+- CTA buttons stacked and full-width for easy tapping
+- Single-column grids for certifications and projects
+- Contact form optimized for small screens
 
- 
-Background behavior:
-- The site now uses a tiled (duplicated) `images/background.jfif` with a dark overlay so the image repeats across the page. To change background behavior edit the `background-image`, `background-size`, and `background-repeat` rules in `styles.css`.
-JSON-driven certifications (new)
-`data/certifications.json`: store all your certifications here as an array of objects. Example fields: `title`, `issuer`, `issued_on` (ISO date), `description`, `domain` (one of `cybersecurity|cloud|devops|ai`), `url`, `image`.
-`certifications.html` loads the JSON and provides a domain filter UI.
-
-Next suggestions I can implement for you:
-- Add a CMS-friendly JSON file and render entries from it
-- Add contact form with form validation and Netlify/Formspree integration
-- Add deployment instructions (GitHub Pages or Netlify)
+## Roadmap
+- Integrate Chatbase.co chatbot on the site (coming soon)
+- Deploy to AWS (S3/CloudFront) with HTTPS and caching (coming soon)
