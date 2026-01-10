@@ -2,6 +2,8 @@
 
 A personal portfolio built as a fast, responsive static website showcasing education, experience, certifications, projects, and competitions — with a contact form that sends real emails.
 
+🌐 **Live Site**: [https://benfredj-mehdi.github.io/Portfolio/](https://benfredj-mehdi.github.io/Portfolio/)
+
 ## Tech Stack
 - HTML, CSS, JavaScript (no framework)
 - Web3Forms (free plan) for the contact form email delivery
@@ -25,18 +27,17 @@ A personal portfolio built as a fast, responsive static website showcasing educa
 ## Contact Form (Web3Forms)
 The contact form posts to `https://api.web3forms.com/submit` using an `access_key` (free plan). After submission, the site shows a confirmation message. No backend is needed.
 
-## Run Locally
-Open `index.html` directly, or serve the folder:
+## Deployment
+Currently hosted on **GitHub Pages**: [https://benfredj-mehdi.github.io/Portfolio/](https://benfredj-mehdi.github.io/Portfolio/)
 
+To update the live site, simply push to the main branch:
 ```powershell
-# Python 3
-python -m http.server 8000; Start-Process "http://localhost:8000"
-
-# Or any static server
-# npx serve .
+git add .
+git commit -m "Update portfolio"
+git push
 ```
 
-## Deployment Notes
+GitHub Pages will automatically rebuild and deploy within ~1 minute.
 - Case-sensitive paths matter in production (Linux hosts). Assets live under `Images/...` — ensure references use the same capitalization.
 - If CSS changes don’t appear after deployment, hard refresh (Ctrl+F5) or temporarily add `?v=2` to `styles.css` in HTML to bust cache.
 
