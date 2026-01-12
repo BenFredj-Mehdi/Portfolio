@@ -33,8 +33,15 @@
 
       <section id="certifications" class="section">
         <h2>Certifications</h2>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <label class="switch">
+            <input type="checkbox" id="see-all-toggle-ai" />
+            <span class="slider round"></span>
+          </label>
+          <span class="tagline">See all certifications</span>
+        </div>
         <div class="grid cert-grid">
-          <article class="card reveal visible" data-domain="ai">
+          <article class="card reveal visible" data-domain="ai" data-paid="true">
             <img class="badge-img" src="Images/Certifications/AI-900.png" alt="Microsoft Certified: Azure AI Fundamentals badge" />
             <h3>Microsoft Certified: Azure AI Fundamentals</h3>
             <p class="issuer">Microsoft</p>
@@ -45,7 +52,7 @@
               <a class="btn small" href="Images/Certifications/PDFVersion/AI-900.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
-          <article class="card reveal visible" data-domain="ai">
+          <article class="card reveal visible" data-domain="ai" data-paid="true">
             <img class="badge-img" src="Images/Certifications/AWSAI.png" alt="AWS Certified AI Practitioner badge" />
             <h3>AWS Certified AI Practitioner</h3>
             <p class="issuer">Amazon Web Services Training and Certification</p>
@@ -56,7 +63,7 @@
               <a class="btn small" href="Images/Certifications/PDFVersion/AWS_AIF.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
-          <article class="card reveal visible" data-domain="ai">
+          <article class="card reveal visible" data-domain="ai" data-paid="true">
             <img class="badge-img" src="Images/Certifications/image.png" alt="AWS Certified Machine Learning Engineer – Associate badge" />
             <h3>AWS Certified Machine Learning Engineer – Associate</h3>
             <p class="issuer">Amazon Web Services Training and Certification</p>
@@ -67,10 +74,10 @@
               <a class="btn small" href="Images/Certifications/PDFVersion/AWS_MLA.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section id="projects" class="section">
+          <article class="card cert-card-wip" data-domain="ai" data-paid="false">
+            <img src="Images/Work in Progress.jpg" alt="Work in Progress" />
+            <h3>More certifications coming soon!</h3>
+          </article>
         <h2>Projects</h2>
         <div class="grid">
           <article class="card project reveal" data-type="ml" data-domain="ai">

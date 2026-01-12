@@ -221,3 +221,281 @@ select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8p
     font-size: 20px;
   }
 }
+
+/* Work in Progress Dynamic Display */
+.wip-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  min-height: 300px;
+}
+
+.wip-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 500px;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(30, 136, 255, 0.3);
+  animation: wipPulse 3s ease-in-out infinite, wipFloat 4s ease-in-out infinite;
+  object-fit: contain;
+}
+
+@keyframes wipPulse {
+  0%, 100% {
+    opacity: 0.85;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes wipFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+/* Certification Toggle */
+.cert-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cert-toggle label {
+  color: var(--muted);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cert-toggle input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.cert-cards-container {
+  display: contents;
+}
+
+.cert-card-wip {
+  background: linear-gradient(180deg, var(--card), rgba(10, 20, 30, 0.4));
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cert-card-wip.visible {
+  display: flex;
+}
+
+.cert-card-wip img {
+  max-width: 80%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 8px;
+  animation: wipPulse 3s ease-in-out infinite, wipFloat 4s ease-in-out infinite;
+}
+
+.cert-card-wip h3 {
+  text-align: center;
+  margin: 0;
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .wip-image {
+    max-height: 350px;
+  }
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  margin-top: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Rounded switch (base) */
+.switch{position:relative;display:inline-block;width:50px;height:28px}
+.switch input{opacity:0;width:0;height:0}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  position: relative;
+}
+
+.mySlides:first-child {
+  display: block;
+}
+
+.mySlides img {
+  width: 100%;
+  display: block;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  z-index: 10;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active, .dot:hover {
+  background-color: var(--accent);
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* Full-page Work In Progress overlay */
+.wip-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+  padding: 24px;
+}
+.wip-overlay.visible { display: flex; }
+.wip-overlay .overlay-content{position:relative;max-width:92vw;max-height:85vh;animation:wipIn .25s ease-out}
+.wip-overlay img{max-width:100%;max-height:85vh;width:auto;height:auto;border-radius:var(--radius);box-shadow:0 18px 60px rgba(30,136,255,0.35)}
+.wip-overlay .close-btn{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.6);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:8px 10px;border-radius:8px;cursor:pointer}
+
+@keyframes wipIn{from{opacity:0;transform:scale(0.98)}to{opacity:1;transform:scale(1)}}
