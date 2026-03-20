@@ -60,17 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Page-specific overlay behavior
-  const path = window.location.pathname.toLowerCase();
-  const isEventsPage = path.endsWith('/events.html') || path.endsWith('events.html');
-  if (isEventsPage) {
-    // Show overlay automatically on Events page
-    showWipOverlay();
-    // Close redirects to home
-    overlayCloseBtn?.addEventListener('click', () => { window.location.href = 'index.html'; });
-  } else {
-    // Close hides overlay and resets switches (certification pages)
-    overlayCloseBtn?.addEventListener('click', () => { hideWipOverlay(); resetCertificationSwitches(); });
-  }
+  // Close hides overlay and resets switches (certification pages)
+  overlayCloseBtn?.addEventListener('click', () => { hideWipOverlay(); resetCertificationSwitches(); });
 
   // Contact form submission with Web3Forms
   const contactForm = document.getElementById('contact-form');
