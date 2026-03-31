@@ -411,6 +411,12 @@ input:checked + .slider:before {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.event-photo:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 28px rgba(30, 136, 255, 0.2);
 }
 
 .event-photo img {
@@ -418,6 +424,67 @@ input:checked + .slider:before {
   height: 240px;
   object-fit: cover;
   display: block;
+}
+
+.clickable-event-image {
+  cursor: pointer;
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.clickable-event-image:hover {
+  transform: scale(1.02);
+  filter: brightness(1.04);
+}
+
+.event-image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 10000;
+  padding: 24px;
+}
+
+.event-image-lightbox.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.event-image-lightbox img {
+  max-width: 94vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 24px 80px rgba(30, 136, 255, 0.32);
+  transform: scale(0.72);
+  opacity: 0;
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), opacity .25s ease;
+}
+
+.event-image-lightbox.visible img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.event-image-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .event-cover-image {

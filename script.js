@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Slideshow initialization
   initSlideshows();
 
+  // Event images click-to-grow viewer
+  initEventImageLightbox();
+
   // Create WIP overlay once
   ensureWipOverlay();
   const overlayCloseBtn = document.querySelector('#wip-overlay .close-btn');
@@ -199,4 +202,68 @@ function resetCertificationSwitches(){
   certSwitches.forEach(sw => {
     sw.checked = false;
   });
+}
+
+// Event images lightbox
+function initEventImageLightbox() {
+  const eventImages = document.querySelectorAll('.event-gallery img');
+  if (!eventImages.length) return;
+
+  const lightbox = ensureEventImageLightbox();
+  const lightboxImage = lightbox.querySelector('img');
+  const lightboxClose = lightbox.querySelector('.event-image-lightbox-close');
+
+  eventImages.forEach((img) => {
+    img.classList.add('clickable-event-image');
+    img.addEventListener('click', () => {
+      lightboxImage.src = img.currentSrc || img.src;
+      lightboxImage.alt = img.alt || 'Event image';
+      lightbox.classList.add('visible');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('visible');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
+      closeLightbox();
+    }
+  });
+}
+
+function ensureEventImageLightbox() {
+  const existing = document.getElementById('event-image-lightbox');
+  if (existing) return existing;
+
+  const lightbox = document.createElement('div');
+  lightbox.id = 'event-image-lightbox';
+  lightbox.className = 'event-image-lightbox';
+  lightbox.setAttribute('aria-hidden', 'true');
+
+  const image = document.createElement('img');
+  image.alt = 'Event image preview';
+
+  const closeButton = document.createElement('button');
+  closeButton.className = 'event-image-lightbox-close';
+  closeButton.type = 'button';
+  closeButton.setAttribute('aria-label', 'Close image preview');
+  closeButton.textContent = '✕';
+
+  lightbox.appendChild(image);
+  lightbox.appendChild(closeButton);
+  document.body.appendChild(lightbox);
+
+  return lightbox;
 }
