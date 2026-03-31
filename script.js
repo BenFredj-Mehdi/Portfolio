@@ -230,9 +230,7 @@ function initEventImageLightbox() {
     document.body.style.overflow = '';
   };
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  lightbox.addEventListener('click', closeLightbox);
 
   lightboxClose?.addEventListener('click', closeLightbox);
 
