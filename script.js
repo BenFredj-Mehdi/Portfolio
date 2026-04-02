@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Slideshow initialization
   initSlideshows();
 
+  // Certifications category filters
+  initCertificationPageFilters();
+
   // Event images click-to-grow viewer
   initEventImageLightbox();
 
@@ -264,4 +267,41 @@ function ensureEventImageLightbox() {
   document.body.appendChild(lightbox);
 
   return lightbox;
+}
+
+function initCertificationPageFilters() {
+  const page = document.getElementById('certifications-page');
+  if (!page) return;
+
+  const toggle = document.getElementById('show-all-certs-toggle');
+  const buttons = Array.from(document.querySelectorAll('.cert-filter-btn'));
+  const sections = Array.from(document.querySelectorAll('.cert-category-section'));
+
+  let selectedCategory = buttons.find(btn => btn.classList.contains('active'))?.dataset.filter || 'cybersecurity';
+
+  const applyFilter = () => {
+    const showAll = !!toggle?.checked;
+
+    sections.forEach(section => {
+      if (showAll || section.dataset.category === selectedCategory) {
+        section.style.display = '';
+      } else {
+        section.style.display = 'none';
+      }
+    });
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedCategory = btn.dataset.filter;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (toggle) toggle.checked = false;
+      applyFilter();
+    });
+  });
+
+  toggle?.addEventListener('change', applyFilter);
+  applyFilter();
 }

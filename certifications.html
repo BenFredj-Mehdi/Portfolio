@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Certifications — Mehdi Ben Fredj</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <div class="nav-left">
+          <a class="brand" href="index.html">Mehdi B.F.</a>
+          <a class="nav-events" href="events.html">Events</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container" id="certifications-page">
+      <section class="section">
+        <h1>Certifications</h1>
+        <p>Choose a category or use the slider to view all certifications.</p>
+      </section>
+
+      <section class="section">
+        <div class="certifications-controls">
+          <div class="cert-filter-buttons" role="tablist" aria-label="Certification categories">
+            <button type="button" class="btn small cert-filter-btn active" data-filter="cybersecurity">Cybersecurity</button>
+            <button type="button" class="btn small cert-filter-btn" data-filter="cloud">Cloud</button>
+            <button type="button" class="btn small cert-filter-btn" data-filter="devops">DevOps</button>
+            <button type="button" class="btn small cert-filter-btn" data-filter="ai">AI</button>
+          </div>
+          <div class="cert-toggle">
+            <label class="switch" for="show-all-certs-toggle">
+              <input type="checkbox" id="show-all-certs-toggle" />
+              <span class="slider round"></span>
+            </label>
+            <label for="show-all-certs-toggle">View all certifications</label>
+          </div>
+        </div>
+
+        <div class="cert-category-section" data-category="cybersecurity">
+          <h2>Cybersecurity</h2>
+          <div class="grid cert-grid" id="certifications-grid">
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/PT1.png" alt="Jr Penetration Tester certification badge" />
+            <h3>Jr Penetration Tester (PT1)</h3>
+            <p class="issuer">TryHackMe</p>
+            <p class="meta">Issued: Aug 24, 2025</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/ac8d1ddd-6609-44fd-b51f-cb137f288521/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/PT1.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/eWPT.png" alt="eWPT Web Penetration Tester badge" />
+            <h3>eLearnSecurity Web Penetration Tester (eWPT)</h3>
+            <p class="issuer">INE / eLearnSecurity</p>
+            <p class="meta">Issued: Mar 23, 2025 • Expires: Mar 23, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://certs.ine.com/c4c56927-170e-4797-839c-ef017494fff2#acc.cb8DN0p6" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/eWPT.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/eJPT.png" alt="eJPT Junior Penetration Tester badge" />
+            <h3>eLearnSecurity Junior Penetration Tester (eJPT)</h3>
+            <p class="issuer">INE / eLearnSecurity</p>
+            <p class="meta">Issued: Feb 21, 2025 • Expires: Feb 21, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://certs.ine.com/1d5be127-a8e0-494d-8d65-cb7bb020992c#acc.ubVPxYHL" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/eJPT.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+        </div>
+        </div>
+
+        <div class="cert-category-section" data-category="cloud">
+          <h2>Cloud</h2>
+          <div class="grid cert-grid">
+
+          <article class="card reveal visible" data-cert-category="cloud">
+            <img class="badge-img" src="Images/Certifications/ICCA.png" alt="INE Cloud Certified Associate badge" />
+            <h3>INE Cloud Certified Associate (ICCA)</h3>
+            <p class="issuer">INE</p>
+            <p class="meta">Issued: Dec 12, 2025 • Expires: Dec 12, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://certs.ine.com/396d0502-3cd7-4c03-a143-a786115643fb#acc.eJ6sAU1i" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/ICCA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cloud">
+            <img class="badge-img" src="Images/Certifications/AWS CCP.png" alt="AWS Certified Cloud Practitioner badge" />
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <p class="issuer">Amazon Web Services Training and Certification</p>
+            <p class="meta">Issued: Jun 27, 2024 • Expires: Dec 04, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/3f012c1c-e333-497b-89fd-3fef91dcc108/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AWS_CCP.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+        </div>
+        </div>
+
+        <div class="cert-category-section" data-category="devops">
+          <h2>DevOps</h2>
+          <div class="grid cert-grid">
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/PCAP.png" alt="PCAP - Certified Associate in Python Programming badge" />
+            <h3>PCAP - Certified Associate in Python Programming</h3>
+            <p class="issuer">Python Institute</p>
+            <p class="meta">Issued: Feb 15, 2024</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/6666a331-93ff-44e7-98ec-2c701ad3248d/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/PCAP.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/RHCSA.png" alt="Red Hat Certified System Administrator badge" />
+            <h3>Red Hat Certified System Administrator (RHCSA)</h3>
+            <p class="issuer">Red Hat</p>
+            <p class="meta">Issued: Oct 30, 2024 • Expires: May 26, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/bac4c3a0-327e-40c4-854a-256399614b9a/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/RHCSA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/RHCE.png" alt="Red Hat Certified Engineer badge" />
+            <h3>Red Hat Certified Engineer (RHCE)</h3>
+            <p class="issuer">Red Hat</p>
+            <p class="meta">Issued: Jan 10, 2025 • Expires: May 26, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/09c870cb-bac8-4ac9-90ec-85230a000798/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/RHCE.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/RHCSC.png" alt="Red Hat Certified Specialist in Containers badge" />
+            <h3>Red Hat Certified Specialist in Containers</h3>
+            <p class="issuer">Red Hat</p>
+            <p class="meta">Issued: May 26, 2025 • Expires: May 26, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/d4858c63-27d8-46ac-8c4e-dbeb0ebb9db4/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/RHCSC.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+        </div>
+        </div>
+
+        <div class="cert-category-section" data-category="ai">
+          <h2>AI</h2>
+          <div class="grid cert-grid">
+          <article class="card reveal visible" data-cert-category="ai">
+            <img class="badge-img" src="Images/Certifications/AI-900.png" alt="Microsoft Certified: Azure AI Fundamentals badge" />
+            <h3>Microsoft Certified: Azure AI Fundamentals</h3>
+            <p class="issuer">Microsoft</p>
+            <p class="meta">Issued: Jun 24, 2025</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/31d6ca8f-6f0d-4150-95f8-0834a50bfc60/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AI-900.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="ai">
+            <img class="badge-img" src="Images/Certifications/AWSAI.png" alt="AWS Certified AI Practitioner badge" />
+            <h3>AWS Certified AI Practitioner</h3>
+            <p class="issuer">Amazon Web Services Training and Certification</p>
+            <p class="meta">Issued: Jun 27, 2025 • Expires: Dec 04, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/6cf45269-0573-4650-878b-08bd7a0d28ce/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AWS_AIF.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="ai">
+            <img class="badge-img" src="Images/Certifications/image.png" alt="AWS Certified Machine Learning Engineer – Associate badge" />
+            <h3>AWS Certified Machine Learning Engineer – Associate</h3>
+            <p class="issuer">Amazon Web Services Training and Certification</p>
+            <p class="meta">Issued: Dec 04, 2025 • Expires: Dec 04, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/916d2837-7052-463d-91cf-a74c859e9f07/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AWS_MLA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container"><p><a href="index.html" class="brand">← Back</a></p></div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

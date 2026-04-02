@@ -28,8 +28,10 @@ body{
 .container{max-width:1100px;margin:0 auto;padding:var(--container-padding)}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
 .nav-left{display:flex;align-items:center;gap:12px}
-.nav-events{color:var(--muted);text-decoration:none;font-weight:600;padding:6px 10px;border:1px solid rgba(255,255,255,0.05);border-radius:8px;transition:color .2s,border-color .2s,background .2s}
-.nav-events:hover{color:var(--accent);border-color:rgba(30,136,255,0.4);background:rgba(255,255,255,0.02)}
+.nav-events{color:#7dd3fc;text-decoration:none;font-weight:600;padding:6px 10px;border:1px solid rgba(125,211,252,0.45);border-radius:8px;transition:color .2s,border-color .2s,background .2s}
+.nav-events:hover{color:#dbeafe;border-color:rgba(125,211,252,0.75);background:rgba(56,189,248,0.12)}
+.nav-certifications{color:#7dd3fc;text-decoration:none;font-weight:600;padding:6px 10px;border:1px solid rgba(125,211,252,0.45);border-radius:8px;transition:color .2s,border-color .2s,background .2s}
+.nav-certifications:hover{color:#dbeafe;border-color:rgba(125,211,252,0.75);background:rgba(56,189,248,0.12)}
 .brand{font-weight:700;color:var(--accent);text-decoration:none}
 .nav-list{list-style:none;margin:0;padding:0;display:flex;gap:18px}
 .nav-list a{color:var(--muted);text-decoration:none}
@@ -46,6 +48,7 @@ body{
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted)}
 .btn.small{padding:6px 8px;font-size:13px}
 .btn-events{background:linear-gradient(90deg,#ec4899,#f472b6);color:#0e0a14}
+.btn-certifications{background:linear-gradient(90deg,#38bdf8,#7dd3fc);color:#05263a}
 .hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .secondary-cta{width:100%;margin-top:8px}
 .section{padding:36px 0}
@@ -318,6 +321,12 @@ select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8p
   margin: 0;
   color: var(--accent);
 }
+/* Certifications page controls */
+.certifications-controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px}
+.cert-filter-buttons{display:flex;flex-wrap:wrap;gap:8px}
+.cert-filter-btn{border:1px solid rgba(255,255,255,0.08)}
+.cert-filter-btn.active{background:linear-gradient(90deg,#38bdf8,#7dd3fc);color:#05263a;border-color:rgba(125,211,252,0.9)}
+.cert-filter-btn[disabled]{opacity:.55;cursor:not-allowed}
 
 @media (max-width: 720px) {
   .wip-image {
