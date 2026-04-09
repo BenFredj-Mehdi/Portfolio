@@ -517,8 +517,8 @@ input:checked + .slider:before {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0;
   position: relative;
@@ -537,6 +537,8 @@ input:checked + .slider:before {
 
 .events-timeline-item {
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
   justify-content: center;
   position: relative;
   z-index: 1;
