@@ -29,11 +29,32 @@
 
       <section class="section">
         <div class="certifications-controls">
-          <div class="cert-filter-buttons" role="tablist" aria-label="Certification categories">
-            <button type="button" class="btn small cert-filter-btn active" data-filter="cybersecurity">Cybersecurity</button>
-            <button type="button" class="btn small cert-filter-btn" data-filter="cloud">Cloud</button>
-            <button type="button" class="btn small cert-filter-btn" data-filter="devops">DevOps</button>
-            <button type="button" class="btn small cert-filter-btn" data-filter="ai">AI</button>
+          <div class="cert-filter-group" id="category-filter-group">
+            <div class="cert-filter-label category">By category</div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="cert-filter-buttons" role="tablist" aria-label="Certification categories">
+              <button type="button" class="btn small cert-filter-btn active" data-filter="cybersecurity">Cybersecurity</button>
+              <button type="button" class="btn small cert-filter-btn" data-filter="cloud">Cloud</button>
+              <button type="button" class="btn small cert-filter-btn" data-filter="devops">DevOps</button>
+              <button type="button" class="btn small cert-filter-btn" data-filter="ai">AI</button>
+              </div>
+              <div class="cert-mode-toggle">
+                <button id="filter-mode-toggle" type="button" class="mode-toggle-btn">Use provider filters</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cert-filter-group" id="provider-filter-group">
+            <div class="cert-filter-label">By provider</div>
+            <div class="cert-provider-filters" aria-label="Filter by provider">
+              <label class="provider-item"><input type="checkbox" value="AWS" class="provider-filter" /> AWS</label>
+              <label class="provider-item"><input type="checkbox" value="INE" class="provider-filter" /> INE</label>
+              <label class="provider-item"><input type="checkbox" value="CyberWarfare" class="provider-filter" /> CyberWarfare</label>
+              <label class="provider-item"><input type="checkbox" value="Microsoft" class="provider-filter" /> Microsoft</label>
+              <label class="provider-item"><input type="checkbox" value="Red Hat" class="provider-filter" /> Red Hat</label>
+              <label class="provider-item"><input type="checkbox" value="TryHackMe" class="provider-filter" /> TryHackMe</label>
+              <label class="provider-item"><input type="checkbox" value="Python Institute" class="provider-filter" /> Python Institute</label>
+            </div>
           </div>
           <div class="cert-toggle">
             <label class="switch" for="show-all-certs-toggle">
@@ -42,12 +63,13 @@
             </label>
             <label for="show-all-certs-toggle">View all certifications</label>
           </div>
+          <!-- mode toggle moved next to category controls -->
         </div>
 
         <div class="cert-category-section" data-category="cybersecurity">
           <h2>Cybersecurity</h2>
           <div class="grid cert-grid" id="certifications-grid">
-          <article class="card reveal visible" data-cert-category="cybersecurity">
+          <article class="card reveal visible" data-cert-category="cybersecurity" data-cert-id="k8s-rta">
             <img class="badge-img" src="Images/Certifications/PT1.png" alt="Jr Penetration Tester certification badge" />
             <h3>Jr Penetration Tester (PT1)</h3>
             <p class="issuer">TryHackMe</p>
@@ -66,6 +88,109 @@
             <div class="cert-links">
               <a class="btn small" href="https://certs.ine.com/c4c56927-170e-4797-839c-ef017494fff2#acc.cb8DN0p6" target="_blank" rel="noreferrer">View credential</a>
               <a class="btn small" href="Images/Certifications/PDFVersion/eWPT.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/eSOC.png" alt="eSOC badge" />
+            <h3>eLearnSecurity SOC Analyst (eSOC)</h3>
+            <p class="issuer">INE / eLearnSecurity</p>
+            <p class="meta">Issued: Apr 26, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://certs.ine.com/2a2365fe-f818-4218-b547-41a8a6077893#acc.hZaRYQ64" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/eSOC.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/eEDA.png" alt="eEDA badge" />
+            <h3>eLearnSecurity Enterprise Defense Administrator (eEDA)</h3>
+            <p class="issuer">INE / eLearnSecurity</p>
+            <p class="meta">Issued: Mar 20, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://certs.ine.com/1941e063-e999-496e-84d1-b4934357e706#acc.Qrmo6Gpa" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/eEDA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/API-RTA.png" alt="API-RTA badge" />
+            <h3>API Red Team Assessment (API-RTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Jan 7, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/695ea30eb714b35dc137affa" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/API-RTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/CRTA.png" alt="CRTA badge" />
+            <h3>Red Team Analyst (CRTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Mar 23, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/69c1683675b1eb345d8103ae" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/CRTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/K8s-RTA.png" alt="K8s-RTA badge" />
+            <h3>K8s Red Team Assessment (K8s-RTA)</h3>
+            
+            <!-- unique id for deduplication across categories -->
+            
+            
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Mar 23, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/69c1c8303f6937a0d91e99e2" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/K8s-RTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/AD-RTS.png" alt="AD-RTS badge" />
+            <h3>Active Directory Red Teaming (AD-RTS)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Feb 21, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/699a3b72b176d59ac60eb560" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AD-RTS.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity">
+            <img class="badge-img" src="Images/Certifications/Web-RTA.png" alt="Web-RTA badge" />
+            <h3>Web Red Team Assessment (Web-RTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Feb 12, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/698daa4c4d24ff2411b0bd64" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/Web-RTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity" data-cert-id="mcrta">
+            <img class="badge-img" src="Images/Certifications/MCRTA.png" alt="MCRTA badge" />
+            <h3>Micro Red Team Assessment (MCRTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Feb 10, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/698b92675f7c23c92b9277bb" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/MCRTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cybersecurity" data-cert-id="mcbta">
+            <img class="badge-img" src="Images/Certifications/MCBTA.png" alt="MCBTA badge" />
+            <h3>Micro Blue Team Assessment (MCBTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Mar 22, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/69bf4ded344ef5c9289f92f0" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/MCBTA.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
 
@@ -107,13 +232,68 @@
               <a class="btn small" href="Images/Certifications/PDFVersion/AWS_CCP.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
+          
+          <article class="card reveal visible" data-cert-category="cloud" data-cert-id="ai-900">
+            <img class="badge-img" src="Images/Certifications/AI-900.png" alt="Microsoft Certified: Azure AI Fundamentals badge" />
+            <h3>Microsoft Certified: Azure AI Fundamentals</h3>
+            <p class="issuer">Microsoft</p>
+            <p class="meta">Issued: Jun 24, 2025</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/31d6ca8f-6f0d-4150-95f8-0834a50bfc60/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AI-900.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cloud" data-cert-id="aws-ai">
+            <img class="badge-img" src="Images/Certifications/AWSAI.png" alt="AWS Certified AI Practitioner badge" />
+            <h3>AWS Certified AI Practitioner</h3>
+            <p class="issuer">Amazon Web Services Training and Certification</p>
+            <p class="meta">Issued: Jun 27, 2025 • Expires: Dec 04, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/6cf45269-0573-4650-878b-08bd7a0d28ce/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AWS_AIF.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cloud" data-cert-id="aws-mla">
+            <img class="badge-img" src="Images/Certifications/image.png" alt="AWS Certified Machine Learning Engineer – Associate badge" />
+            <h3>AWS Certified Machine Learning Engineer – Associate</h3>
+            <p class="issuer">Amazon Web Services Training and Certification</p>
+            <p class="meta">Issued: Dec 04, 2025 • Expires: Dec 04, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/916d2837-7052-463d-91cf-a74c859e9f07/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/AWS_MLA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+          
+          <article class="card reveal visible" data-cert-category="cloud" data-cert-id="mcrta">
+            <img class="badge-img" src="Images/Certifications/MCRTA.png" alt="MCRTA badge" />
+            <h3>Micro Red Team Assessment (MCRTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Feb 10, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/698b92675f7c23c92b9277bb" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/MCRTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+
+          <article class="card reveal visible" data-cert-category="cloud" data-cert-id="mcbta">
+            <img class="badge-img" src="Images/Certifications/MCBTA.png" alt="MCBTA badge" />
+            <h3>Micro Blue Team Assessment (MCBTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Mar 22, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/69bf4ded344ef5c9289f92f0" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/MCBTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
         </div>
         </div>
 
         <div class="cert-category-section" data-category="devops">
           <h2>DevOps</h2>
           <div class="grid cert-grid">
-          <article class="card reveal visible" data-cert-category="devops">
+          <article class="card reveal visible" data-cert-category="devops" data-cert-id="k8s-rta">
             <img class="badge-img" src="Images/Certifications/PCAP.png" alt="PCAP - Certified Associate in Python Programming badge" />
             <h3>PCAP - Certified Associate in Python Programming</h3>
             <p class="issuer">Python Institute</p>
@@ -156,13 +336,35 @@
               <a class="btn small" href="Images/Certifications/PDFVersion/RHCSC.pdf" target="_blank" rel="noreferrer">View certification</a>
             </div>
           </article>
+          
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/K8s-RTA.png" alt="K8s-RTA badge" />
+            <h3>K8s Red Team Assessment (K8s-RTA)</h3>
+            <p class="issuer">CyberWarfare Labs</p>
+            <p class="meta">Issued: Mar 23, 2026</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://labs.cyberwarfare.live/credential/achievement/69c1c8303f6937a0d91e99e2" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/K8s-RTA.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
+          
+          <article class="card reveal visible" data-cert-category="devops">
+            <img class="badge-img" src="Images/Certifications/CKAD.png" alt="CKAD - Certified Kubernetes Application Developer badge" />
+            <h3>Certified Kubernetes Application Developer (CKAD)</h3>
+            <p class="issuer">The Linux Foundation</p>
+            <p class="meta">Issued: Feb 16, 2026 • Expires: Feb 17, 2028</p>
+            <div class="cert-links">
+              <a class="btn small" href="https://www.credly.com/badges/5af21bf4-cb8c-4ef7-bbb3-7ec7a88eb879/public_url" target="_blank" rel="noreferrer">View credential</a>
+              <a class="btn small" href="Images/Certifications/PDFVersion/CKAD.pdf" target="_blank" rel="noreferrer">View certification</a>
+            </div>
+          </article>
         </div>
         </div>
 
         <div class="cert-category-section" data-category="ai">
           <h2>AI</h2>
           <div class="grid cert-grid">
-          <article class="card reveal visible" data-cert-category="ai">
+          <article class="card reveal visible" data-cert-category="ai" data-cert-id="ai-900">
             <img class="badge-img" src="Images/Certifications/AI-900.png" alt="Microsoft Certified: Azure AI Fundamentals badge" />
             <h3>Microsoft Certified: Azure AI Fundamentals</h3>
             <p class="issuer">Microsoft</p>
@@ -173,7 +375,7 @@
             </div>
           </article>
 
-          <article class="card reveal visible" data-cert-category="ai">
+          <article class="card reveal visible" data-cert-category="ai" data-cert-id="aws-ai">
             <img class="badge-img" src="Images/Certifications/AWSAI.png" alt="AWS Certified AI Practitioner badge" />
             <h3>AWS Certified AI Practitioner</h3>
             <p class="issuer">Amazon Web Services Training and Certification</p>
@@ -184,7 +386,7 @@
             </div>
           </article>
 
-          <article class="card reveal visible" data-cert-category="ai">
+          <article class="card reveal visible" data-cert-category="ai" data-cert-id="aws-mla">
             <img class="badge-img" src="Images/Certifications/image.png" alt="AWS Certified Machine Learning Engineer – Associate badge" />
             <h3>AWS Certified Machine Learning Engineer – Associate</h3>
             <p class="issuer">Amazon Web Services Training and Certification</p>

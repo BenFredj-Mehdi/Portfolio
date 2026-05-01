@@ -328,6 +328,34 @@ select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8p
 .cert-filter-btn.active{background:linear-gradient(90deg,#38bdf8,#7dd3fc);color:#05263a;border-color:rgba(125,211,252,0.9)}
 .cert-filter-btn[disabled]{opacity:.55;cursor:not-allowed}
 
+/* Provider filter UI */
+.cert-filter-group{display:flex;flex-direction:column;gap:6px}
+.cert-filter-label{font-size:13px;color:var(--muted);font-weight:600}
+.cert-filter-label.category{font-size:15px;color:var(--accent);font-weight:700}
+.cert-provider-filters{display:flex;flex-wrap:wrap;gap:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.provider-item{display:inline-flex;align-items:center;gap:8px;padding:6px 8px;background:transparent;border-radius:8px;color:var(--muted);cursor:pointer;transition:all .18s ease}
+.provider-item input{accent-color:var(--accent)}
+.provider-item:hover{background:rgba(255,255,255,0.02);transform:translateY(-2px)}
+
+/* Provider filter group hidden by default for category-first UX */
+#provider-filter-group{display:none}
+
+.cert-mode-toggle{display:flex;align-items:center;gap:8px}
+.cert-mode-toggle .mode-info{color:var(--muted);font-size:13px}
+
+/* Mode toggle button: distinct from category chips */
+.mode-toggle-btn{background:transparent;border:1px solid rgba(30,136,255,0.18);color:var(--accent);padding:6px 10px;border-radius:8px;font-weight:700;cursor:pointer}
+.mode-toggle-btn:hover{background:rgba(30,136,255,0.04);transform:translateY(-2px)}
+
+.cert-filter-btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Make controls look smoother on small screens */
+@media (max-width:720px){
+  .certifications-controls{flex-direction:column;align-items:stretch}
+  .cert-filter-group{width:100%}
+  .cert-provider-filters{justify-content:flex-start}
+}
+
 @media (max-width: 720px) {
   .wip-image {
     max-height: 350px;
