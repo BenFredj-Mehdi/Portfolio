@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="has-side-rail">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />
   </head>
-  <body>
+  <body class="home-page">
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <div class="badge-field" aria-hidden="true">
       <img class="badge-float" src="Images/Certifications/AWS CCP.png" alt="" style="--x:10%;--y:18%;--dur:32s;--delay:-4s;--size:96px" />
       <img class="badge-float" src="Images/Certifications/AWSAI.png" alt="" style="--x:72%;--y:12%;--dur:36s;--delay:-7s;--size:90px" />
@@ -34,34 +35,51 @@
       <nav class="nav container">
         <div class="nav-left">
           <a class="brand" href="index.html">Mehdi B.F.</a>
-          <a class="nav-events" href="events.html">Events</a>
-          <a class="nav-certifications" href="certifications.html">Certifications</a>
+          <div class="nav-links-desktop">
+            <a class="nav-events" href="events.html">Events</a>
+            <a class="nav-certifications" href="certifications.html">Certifications</a>
+          </div>
         </div>
-        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
         <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="#cursus">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <section class="hero container">
+      <section id="home" class="hero container">
         <div class="hero-grid">
-          <div class="hero-image">
-            <img src="Images/Mehdi.png" alt="Mehdi Ben Fredj" class="profile-img" />
+          <div class="hero-image hero-depth">
+            <div class="portrait-frame">
+              <span class="portrait-scan"></span>
+              <img src="Images/Mehdi.png" alt="Mehdi Ben Fredj" class="profile-img" />
+            </div>
+            <div class="hero-signal"><span class="signal-dot"></span> Available for ambitious builds</div>
           </div>
           <div class="hero-main">
+            <p class="eyebrow"><span>01</span> Systems thinker / security builder</p>
             <h1 class="name">Mehdi Ben Fredj</h1>
             <p class="tagline">IT Engineering student with strong expertise across Cybersecurity, Cloud, DevOps, and AI. I design secure systems, build scalable cloud architectures, automate infrastructure, and prototype intelligent models.</p>
             <div class="hero-cta secondary-cta">
-              <a class="btn btn-events" href="events.html">Events</a>
-              <a class="btn btn-certifications" href="certifications.html">Certifications</a>
+              <a class="btn btn-primary" href="#projects">Explore my work <span>↗</span></a>
+              <a class="btn btn-outline" href="#contact">Start a conversation</a>
+            </div>
+            <div class="hero-metrics" aria-label="Portfolio highlights">
+              <div><strong>04</strong><span>Focus areas</span></div>
+              <div><strong>30+</strong><span>Certifications</span></div>
+              <div><strong>24/7</strong><span>Curiosity online</span></div>
             </div>
           </div>
         </div>
+        <div class="hero-scroll-cue"><span></span> Scroll to explore</div>
       </section>
     </header>
 
     <main>
       <section id="cursus" class="section container">
-        <h2>Education</h2>
+        <div class="section-heading"><p class="eyebrow"><span>02</span> The foundation</p><h2>Education</h2></div>
         <div id="cursus-list">
           <article class="card reveal">
             <h3>1st Year Engineering Cycle</h3>
@@ -79,76 +97,218 @@
       </section>
 
       <section id="experience" class="section container">
-        <h2>Professional Experience</h2>
-        <div id="experience-list">
-          <article class="card reveal">
+        <div class="section-heading"><p class="eyebrow"><span>03</span> In the field</p><h2>Professional Experience</h2></div>
+        <div id="experience-list" class="timeline-track">
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
+            <h3>AWS Solutions Architect Instructor –  <span class="meta">Aug 2026</span></h3>
+            <p class="issuer">TEK-UP University, Ariana, Tunisia</p>
+            <ul>
+              <li>Delivered AWS Solutions Architect training covering cloud architecture, core AWS services, security, networking, storage, and scalability.</li>
+              <li>Designed and led hands-on demonstrations and labs to help participants design and deploy solutions on AWS.</li>
+              <li>Prepared learners for the AWS Certified Solutions Architect – Associate (SAA-C03) exam through interactive sessions, real-world scenarios, and exam-focused guidance.</li>
+            </ul>
+          </article>
+          </div>
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
+            <h3>Microsoft Azure Fundamentals (AZ-900) Instructor –  <span class="meta">Aug 2026</span></h3>
+            <p class="issuer">TEK-UP University, Ariana, Tunisia</p>
+            <ul>
+              <li>Delivered the AZ-900 course covering core cloud concepts, Azure services, security, governance, and pricing.</li>
+              <li>Designed and led hands-on demonstrations to give participants practical experience with the Azure platform.</li>
+              <li>Prepared learners for the AZ-900 certification exam through interactive sessions, real-world scenarios, and exam-focused guidance.</li>
+            </ul>
+          </article>
+          </div>
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
+            <h3>Cybersecurity Intern –  <span class="meta">Jul 2026</span></h3>
+            <p class="issuer">EY Tunisia, Tunis, Tunisia</p>
+            <ul>
+              <li>Developed an internal cybersecurity solution to support web application security assessments.</li>
+              <li>Collaborated with the Cybersecurity team on the design and implementation of security-focused tools and solutions.</li>
+            </ul>
+          </article>
+          </div>
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
+            <h3>AWS AI Foundations Bootcamp Instructor –  <span class="meta">Feb 2026</span></h3>
+            <p class="issuer">IEEE TEK-UP SB, Ariana, Tunisia</p>
+            <ul>
+              <li>Led a 3-day intensive AWS AI Foundations Bootcamp for students, covering SageMaker, Rekognition, and AI fundamentals.</li>
+              <li>Designed hands-on labs to reinforce cloud and AI concepts in a practical environment.</li>
+              <li>Engaged students in real-world projects to enhance understanding and certification readiness.</li>
+            </ul>
+          </article>
+          </div>
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
             <h3>AWS AI Foundations Instructor –  <span class="meta">Aug 2025</span></h3>
-            <p class="issuer">TEK-UP University Ariana, Tunisia</p>
+            <p class="issuer">TEK-UP University, Ariana, Tunisia</p>
             <ul>
               <li>Delivered AWS AI Foundations training to university students, covering key AI concepts and AWS cloud services such as SageMaker and Rekognition.</li>
               <li>Guided students through hands-on labs and real-world AI applications.</li>
               <li>Prepared learners for certification and supported them in practical cloud AI projects.</li>
             </ul>
           </article>
-          <article class="card reveal">
+          </div>
+          <div class="tl-item reveal">
+            <span class="tl-node" aria-hidden="true"></span>
+          <article class="card">
             <h3>Red Hat Certified Specialist in Containers Instructor –  <span class="meta">Jul 2025</span></h3>
-            <p class="issuer">TEK-UP University Ariana, Tunisia</p>
+            <p class="issuer">TEK-UP University, Ariana, Tunisia</p>
             <ul>
               <li>Taught advanced containerization concepts using Docker and OpenShift.</li>
               <li>Helped students master enterprise container workflows and DevOps-oriented deployment strategies.</li>
               <li>Supported learners in container management, image creation, and production-grade deployment practices.</li>
             </ul>
           </article>
+          </div>
         </div>
       </section>
 
       <!-- Projects first as requested -->
       <section id="projects" class="section container">
-        <h2>Projects</h2>
+        <div class="section-heading"><p class="eyebrow"><span>04</span> Selected experiments</p><h2>Projects</h2></div>
         <div class="controls">
           <label>Filter: </label>
           <select id="project-filter">
             <option value="all">All</option>
             <option value="web">Web</option>
-            <option value="ml">ML</option>
-            <option value="security">Security</option>
+            <option value="ml">AI / ML</option>
           </select>
         </div>
 
         <div class="grid" id="projects-list">
           <article class="card project reveal" data-type="web">
-            <h3>Portfolio Site</h3>
-            <p>Responsive portfolio built with vanilla HTML/CSS/JS.</p>
+            <h3>TheRoom.tn <span class="meta">Freelance</span></h3>
+            <p>Website for TheRoom, an escape game venue in Tunisia, built as a freelance project. Visitors browse the game scenarios, check pack pricing, and book a session online.</p>
+            <ul class="tags"><li>React</li><li>React Router</li><li>Axios</li><li>REST API</li><li>Google Maps</li></ul>
+            <div class="cert-links"><a class="btn small" href="https://theroom.tn" target="_blank" rel="noopener">Visit site ↗</a></div>
+          </article>
+
+          <article class="card project reveal" data-type="web">
+            <h3>HerWellness <span class="meta">IEEE WIE TEK-UP Hackathon · 3rd place</span></h3>
+            <p>Women-focused pregnancy tracking web app with a month-by-month follow-up and personalized guidance for each stage of pregnancy.</p>
+            <ul>
+              <li>AI-powered chatbot that acts as an interactive guide for pregnant users.</li>
+              <li>Bilingual experience: English and Tunisian dialect, with the chatbot fully operating in Tunisian dialect.</li>
+            </ul>
+            <ul class="tags"><li>React</li><li>Firebase</li><li>AI Chatbot</li></ul>
+            <div class="cert-links"><a class="btn small" href="https://github.com/BenFredj-Mehdi/HerWellness" target="_blank" rel="noopener">GitHub ↗</a></div>
           </article>
 
           <article class="card project reveal" data-type="ml">
-            <h3>ML Classifier</h3>
-            <p>Prototype classifier for dataset X. (Placeholder)</p>
+            <h3>AskMehdi <span class="meta">Personal Project</span></h3>
+            <p>Custom Large Language Model assistant built on LLaMA 4 and the Groq API, designed to learn from personal documents for intelligent Q&amp;A.</p>
+            <ul>
+              <li>Implements RAG (Retrieval-Augmented Generation) to pull accurate answers from my CV.</li>
+            </ul>
+            <ul class="tags"><li>LLaMA 4</li><li>Groq API</li><li>RAG</li></ul>
+            <div class="cert-links"><a class="btn small" href="https://github.com/BenFredj-Mehdi/AskMehdi" target="_blank" rel="noopener">GitHub ↗</a></div>
           </article>
 
-          <article class="card project reveal" data-type="security">
-            <h3>CTF Toolkit</h3>
-            <p>Scripts and tools used during CTF practice. (Placeholder)</p>
+          <article class="card project reveal" data-type="ml">
+            <h3>Stroke Prediction ML Model <span class="meta">Mario Hack – SESAME</span></h3>
+            <p>Machine learning model that predicts stroke occurrences using diverse preprocessing and classification techniques.</p>
+            <ul>
+              <li>Worked with uncleaned real-world data: data cleaning, feature engineering, and model evaluation.</li>
+            </ul>
+            <ul class="tags"><li>Python</li><li>Pandas</li><li>Scikit-learn</li><li>ML</li></ul>
+            <div class="cert-links"><a class="btn small" href="https://github.com/BenFredj-Mehdi/Stroke-Prediction" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </article>
+
+          <article class="card project reveal" data-type="web">
+            <h3>Portfolio <span class="meta">Personal Project</span></h3>
+            <p>This website: a responsive personal portfolio showcasing my projects, experience, certifications, and events.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <div class="cert-links"><a class="btn small" href="https://github.com/BenFredj-Mehdi/Portfolio" target="_blank" rel="noopener">GitHub ↗</a></div>
           </article>
         </div>
       </section>
 
       <section id="competitions" class="section container">
-        <h2>Competitions</h2>
+        <div class="section-heading"><p class="eyebrow"><span>05</span> Under pressure</p><h2>Competitions</h2></div>
         <div class="grid" id="competitions-list">
           <article class="card reveal">
-            <h3>ACM-style Programming Contest</h3>
-            <p>Team-based challenge focusing on algorithms and optimization. (Placeholder)</p>
+            <h3>IEEE WIE TEK-UP Hackathon <span class="meta">3rd place</span></h3>
+            <p>Built HerWellness, a bilingual pregnancy-tracking web app with an AI chatbot, within the hackathon's time limit. Awarded 3rd place for innovation, impact, and technical implementation.</p>
           </article>
           <article class="card reveal">
-            <h3>Cybersecurity CTF</h3>
-            <p>Capture-the-Flag challenges — web, crypto, forensics. (Placeholder)</p>
+            <h3>Mario Hack <span class="meta">SESAME University</span></h3>
+            <p>Hackathon challenge where I developed a stroke prediction model from uncleaned real-world data.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills" class="section container">
+        <div class="section-heading"><p class="eyebrow"><span>06</span> The toolbox</p><h2>Skills</h2></div>
+        <div class="grid" id="skills-list">
+          <article class="card reveal">
+            <h3>Cloud Platforms</h3>
+            <ul class="tags"><li>AWS (EC2, IAM, Lambda, SageMaker, S3, VPC)</li><li>Azure</li><li>Multi-Cloud Security Concepts</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Containers &amp; Orchestration</h3>
+            <ul class="tags"><li>Kubernetes (CKAD)</li><li>Docker</li><li>OpenShift</li><li>Helm</li><li>Container Security</li><li>Red Hat Containers</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>DevOps &amp; Linux</h3>
+            <ul class="tags"><li>RHEL Administration (RHCSA/RHCE)</li><li>Shell Scripting</li><li>System Hardening</li><li>Networking</li><li>CI/CD Fundamentals</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Cybersecurity &amp; Red Teaming</h3>
+            <ul class="tags"><li>Active Directory Attacks</li><li>Web Application Pentesting</li><li>API Security Testing</li><li>Network Enumeration</li><li>Privilege Escalation</li><li>Lateral Movement</li><li>TryHackMe (Top 1%)</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>AI &amp; Machine Learning</h3>
+            <ul class="tags"><li>Python (Pandas, NumPy, Scikit-learn)</li><li>ML Modeling</li><li>Data Preprocessing</li><li>AWS ML Services</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Programming</h3>
+            <ul class="tags"><li>Python</li><li>C</li><li>C++</li><li>Java</li><li>JavaScript</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Tools &amp; Technologies</h3>
+            <ul class="tags"><li>Git/GitHub</li><li>SQL</li><li>HTML/CSS</li><li>Burp Suite</li><li>Nmap</li><li>Metasploit</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Languages</h3>
+            <ul class="tags"><li>Arabic: Native</li><li>French: Native</li><li>English: Professional</li><li>German: Beginner</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Soft Skills</h3>
+            <ul class="tags"><li>Leadership &amp; Initiative</li><li>Strategic Thinking</li><li>Analytical Mindset</li><li>Advanced Problem-Solving</li><li>Clear Technical Communication</li><li>Research &amp; Threat Analysis</li><li>Time Management</li><li>Adaptability under Pressure</li><li>Team Collaboration</li><li>Continuous Learning</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="activities" class="section container">
+        <div class="section-heading"><p class="eyebrow"><span>07</span> Beyond the code</p><h2>Activities</h2></div>
+        <div class="grid" id="activities-list">
+          <article class="card reveal">
+            <h3>General Secretary <span class="meta">2026 – Present</span></h3>
+            <p class="issuer">IEEE TEK-UP Student Branch, Ariana, Tunisia</p>
+          </article>
+          <article class="card reveal">
+            <h3>Member <span class="meta">2023 – Present</span></h3>
+            <p class="issuer">Securinets TEK-UP (Cybersecurity Club), Ariana, Tunisia</p>
+          </article>
+          <article class="card reveal">
+            <h3>Member <span class="meta">2023 – 2025</span></h3>
+            <p class="issuer">IEEE TEK-UP Student Branch, Ariana, Tunisia</p>
           </article>
         </div>
       </section>
 
       <section id="contact" class="section container">
-        <h2>Contact Me</h2>
+        <div class="section-heading"><p class="eyebrow"><span>08</span> Open channel</p><h2>Contact Me</h2></div>
         <div id="contact-container">
           <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="d793a97d-ed75-4977-9e94-e06428782cfc">

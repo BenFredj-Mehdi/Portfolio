@@ -8,8 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.querySelector('.nav-toggle');
   const navList = document.querySelector('.nav-list');
   navToggle?.addEventListener('click', () => {
-    navList.style.display = navList.style.display === 'flex' ? 'none' : 'flex';
+    const isOpen = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.classList.toggle('is-open', isOpen);
   });
+  navList?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('open');
+      navToggle?.classList.remove('is-open');
+      navToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  initHomeMotion();
+  initSideRail();
+  initExperienceTimeline();
+  initNavScrollState();
+  initCustomCursor();
+  initParticleField();
+  initCardTilt();
+  initButtonRipple();
+  initHeroGlitch();
+  initCountUp();
 
   // Smooth scrolling for internal links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -96,6 +116,345 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Right-edge section rail: one dot per section, active highlight, counter, back-to-top
+function initSideRail() {
+  if (!document.body.classList.contains('home-page')) return;
+
+  const targets = [document.getElementById('home'), ...document.querySelectorAll('main section[id]')].filter(Boolean);
+  if (targets.length < 2) return;
+  const pad = (n) => String(n).padStart(2, '0');
+  const total = pad(targets.length);
+
+  const rail = document.createElement('nav');
+  rail.className = 'side-rail';
+  rail.setAttribute('aria-label', 'Page sections');
+
+  const count = document.createElement('div');
+  count.className = 'rail-count';
+  const countNow = document.createElement('b');
+  count.append(countNow, `/${total}`);
+
+  const list = document.createElement('ol');
+  list.className = 'rail-list';
+  const entries = targets.map((section, i) => {
+    const heading = section.querySelector('h2');
+    const name = section.id === 'home' ? 'Home' : (heading ? heading.textContent.trim() : section.id);
+
+    const li = document.createElement('li');
+    li.className = 'rail-item';
+    const link = document.createElement('a');
+    link.className = 'rail-link';
+    link.href = `#${section.id}`;
+    link.setAttribute('aria-label', name);
+    const label = document.createElement('span');
+    label.className = 'rail-label';
+    const num = document.createElement('i');
+    num.textContent = pad(i + 1);
+    label.append(num, name);
+    const dot = document.createElement('span');
+    dot.className = 'rail-dot';
+    link.append(label, dot);
+    li.appendChild(link);
+    list.appendChild(li);
+    return { section, li, link };
+  });
+
+  const top = document.createElement('a');
+  top.className = 'rail-top';
+  top.href = '#home';
+  top.setAttribute('aria-label', 'Back to top');
+  top.textContent = '↑';
+
+  rail.append(count, list, top);
+  document.body.appendChild(rail);
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const probe = window.scrollY + window.innerHeight * 0.4;
+    let current = 0;
+    entries.forEach((entry, i) => {
+      if (entry.section.getBoundingClientRect().top + window.scrollY <= probe) current = i;
+    });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = entries.length - 1;
+
+    entries.forEach((entry, i) => {
+      entry.li.classList.toggle('is-active', i === current);
+      entry.li.classList.toggle('is-passed', i < current);
+      if (i === current) entry.link.setAttribute('aria-current', 'true');
+      else entry.link.removeAttribute('aria-current');
+    });
+    countNow.textContent = pad(current + 1);
+    rail.classList.toggle('is-visible', window.scrollY > 240);
+  };
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  update();
+}
+
+// Experience timeline: the connecting line fills and nodes light up as you scroll past them
+function initExperienceTimeline() {
+  const track = document.querySelector('.timeline-track');
+  const items = track ? Array.from(track.querySelectorAll('.tl-item')) : [];
+  if (!items.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NODE_Y = 32;
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const gap = parseFloat(getComputedStyle(track).rowGap) || 0;
+    const ref = window.innerHeight * 0.55;
+    let lastReached = -1;
+
+    items.forEach((item, i) => {
+      const rect = item.getBoundingClientRect();
+      const nodeY = rect.top + NODE_Y;
+      const reached = reduceMotion || ref >= nodeY;
+      const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, (ref - nodeY) / (rect.height + gap)));
+      item.classList.toggle('is-reached', reached);
+      item.style.setProperty('--seg', progress.toFixed(3));
+      if (reached) lastReached = i;
+    });
+    items.forEach((item, i) => item.classList.toggle('is-current', !reduceMotion && i === lastReached));
+  };
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  update();
+}
+
+function initNavScrollState() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const update = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+function initCustomCursor() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+  if (reduceMotion || coarsePointer) return;
+
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot';
+  const ring = document.createElement('div');
+  ring.className = 'cursor-ring';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+  document.body.classList.add('has-custom-cursor');
+
+  let ringX = window.innerWidth / 2, ringY = window.innerHeight / 2;
+  let targetX = ringX, targetY = ringY;
+
+  window.addEventListener('pointermove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    dot.style.transform = `translate(${targetX}px, ${targetY}px) translate(-50%,-50%)`;
+  });
+
+  const animateRing = () => {
+    ringX += (targetX - ringX) * 0.18;
+    ringY += (targetY - ringY) * 0.18;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%,-50%)`;
+    requestAnimationFrame(animateRing);
+  };
+  requestAnimationFrame(animateRing);
+
+  const interactiveSelector = 'a, button, .card, input, textarea, select';
+  document.addEventListener('pointerover', (e) => {
+    if (e.target.closest(interactiveSelector)) ring.classList.add('is-active');
+  });
+  document.addEventListener('pointerout', (e) => {
+    if (e.target.closest(interactiveSelector)) ring.classList.remove('is-active');
+  });
+}
+
+function initParticleField() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'fx-canvas';
+  document.body.insertBefore(canvas, document.body.firstChild);
+  const ctx = canvas.getContext('2d');
+
+  let width, height, nodes;
+
+  const buildNodes = () => {
+    const count = Math.min(70, Math.round((width * height) / 22000));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+    }));
+  };
+
+  const resize = () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    buildNodes();
+  };
+  window.addEventListener('resize', resize);
+  resize();
+
+  const linkDist = 140;
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+    for (const n of nodes) {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > width) n.vx *= -1;
+      if (n.y < 0 || n.y > height) n.vy *= -1;
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < linkDist) {
+          ctx.strokeStyle = `rgba(94,231,247,${0.14 * (1 - dist / linkDist)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = 'rgba(94,231,247,.55)';
+      ctx.beginPath();
+      ctx.arc(nodes[i].x, nodes[i].y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+}
+
+function initCardTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  document.querySelectorAll('.card').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const bounds = card.getBoundingClientRect();
+      const px = (e.clientX - bounds.left) / bounds.width;
+      const py = (e.clientY - bounds.top) / bounds.height;
+      const rotateY = (px - 0.5) * 8;
+      const rotateX = (0.5 - py) * 8;
+      card.style.setProperty('--rx', `${rotateX}deg`);
+      card.style.setProperty('--ry', `${rotateY}deg`);
+      card.style.setProperty('--mx', `${px * 100}%`);
+      card.style.setProperty('--my', `${py * 100}%`);
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+    });
+  });
+}
+
+function initButtonRipple() {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn');
+    if (!btn) return;
+    const bounds = btn.getBoundingClientRect();
+    const size = Math.max(bounds.width, bounds.height) * 1.6;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${e.clientX - bounds.left}px`;
+    ripple.style.top = `${e.clientY - bounds.top}px`;
+    btn.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+}
+
+function initHeroGlitch() {
+  const name = document.querySelector('.hero .name');
+  if (!name) return;
+  name.dataset.text = name.textContent;
+  requestAnimationFrame(() => name.classList.add('glitch-in'));
+}
+
+function initCountUp() {
+  const metrics = document.querySelectorAll('.hero-metrics strong');
+  if (!metrics.length) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const animateMetric = (el) => {
+    const raw = el.textContent.trim();
+    const match = raw.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const [, digits, suffix] = match;
+    const target = parseInt(digits, 10);
+    if (reduceMotion) return;
+
+    const duration = 1100;
+    const start = performance.now();
+    const pad = digits.length;
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = Math.round(target * eased);
+      el.textContent = `${String(value).padStart(pad, '0')}${suffix}`;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    el.textContent = `${'0'.padStart(pad, '0')}${suffix}`;
+    requestAnimationFrame(step);
+  };
+
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateMetric(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  metrics.forEach((el) => obs.observe(el));
+}
+
+function initHomeMotion() {
+  if (!document.body.classList.contains('home-page')) return;
+
+  const progress = document.querySelector('.scroll-progress span');
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const navLinks = Array.from(document.querySelectorAll('.nav-list a[href^="#"]'));
+  const portrait = document.querySelector('.portrait-frame');
+
+  const updateScrollState = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.width = `${maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0}%`;
+    const current = sections.reduce((active, section) => window.scrollY + 180 >= section.offsetTop ? section.id : active, 'cursus');
+    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
+  };
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+  updateScrollState();
+
+  document.querySelector('.hero')?.addEventListener('pointermove', (event) => {
+    if (!portrait || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const rotateX = ((event.clientY - bounds.top) / bounds.height - 0.5) * -5;
+    const rotateY = ((event.clientX - bounds.left) / bounds.width - 0.5) * 5;
+    portrait.style.transform = `rotate(-3deg) perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+  document.querySelector('.hero')?.addEventListener('pointerleave', () => {
+    if (portrait) portrait.style.transform = 'rotate(-3deg)';
+  });
+}
 
 // Slideshow functionality
 let slideIndex = 1;
