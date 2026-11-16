@@ -4,21 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Nav toggle
+  // Nav toggle (mobile menu sheet with a tap-to-close scrim)
   const navToggle = document.querySelector('.nav-toggle');
   const navList = document.querySelector('.nav-list');
-  navToggle?.addEventListener('click', () => {
-    const isOpen = navList.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.classList.toggle('is-open', isOpen);
-  });
-  navList?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navList.classList.remove('open');
-      navToggle?.classList.remove('is-open');
-      navToggle?.setAttribute('aria-expanded', 'false');
-    });
-  });
+  let navScrim = null;
+  if (navToggle && navList) {
+    navScrim = document.createElement('div');
+    navScrim.className = 'nav-scrim';
+    navScrim.setAttribute('aria-hidden', 'true');
+    (document.querySelector('.site-header') || document.body).prepend(navScrim);
+  }
+  const setMenuOpen = (open) => {
+    if (!navList) return;
+    navList.classList.toggle('open', open);
+    navScrim?.classList.toggle('visible', open);
+    navToggle?.classList.toggle('is-open', open);
+    navToggle?.setAttribute('aria-expanded', String(open));
+    if (navToggle) navToggle.textContent = open ? '✕' : '☰';
+  };
+  navToggle?.addEventListener('click', () => setMenuOpen(!navList.classList.contains('open')));
+  navScrim?.addEventListener('click', () => setMenuOpen(false));
+  navList?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenuOpen(false); });
+
+  initMobileTabbar(() => setMenuOpen(false));
+  initMobileEventsTimeline();
 
   initHomeMotion();
   initSideRail();
@@ -116,6 +126,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+const MOBILE_QUERY = '(max-width: 720px)';
+const isMobileViewport = () => window.matchMedia(MOBILE_QUERY).matches;
+
+// Mobile bottom tab bar: injected on every page, shown only by mobile.css
+function initMobileTabbar(onNavigate) {
+  const isHome = document.body.classList.contains('home-page');
+  const page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const onEventPage = page === 'events.html' || !!document.querySelector('.site-footer a[href="events.html"]');
+  const onCertPage = page === 'certifications.html';
+
+  const icons = {
+    home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h5v-6h4v6h5V9.5"/>',
+    projects: '<path d="m8 8-5 4 5 4"/><path d="m16 8 5 4-5 4"/><path d="m14 4-4 16"/>',
+    events: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+    certs: '<circle cx="12" cy="9" r="6"/><path d="m8.5 13.8-1.5 7.2 5-3 5 3-1.5-7.2"/>',
+    contact: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  };
+  const tabs = [
+    { key: 'home', label: 'Home', href: isHome ? '#home' : 'index.html' },
+    { key: 'projects', label: 'Projects', href: isHome ? '#projects' : 'index.html#projects' },
+    { key: 'events', label: 'Events', href: 'events.html' },
+    { key: 'certs', label: 'Certs', href: 'certifications.html' },
+    { key: 'contact', label: 'Contact', href: isHome ? '#contact' : 'index.html#contact' },
+  ];
+
+  const bar = document.createElement('nav');
+  bar.className = 'mobile-tabbar';
+  bar.setAttribute('aria-label', 'Main navigation');
+  const links = {};
+  tabs.forEach(tab => {
+    const a = document.createElement('a');
+    a.href = tab.href;
+    a.dataset.tab = tab.key;
+    a.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[tab.key]}</svg><span>${tab.label}</span>`;
+    a.addEventListener('click', () => onNavigate?.());
+    bar.appendChild(a);
+    links[tab.key] = a;
+  });
+  document.body.appendChild(bar);
+
+  const setActive = (key) => Object.entries(links).forEach(([k, a]) => {
+    a.classList.toggle('active', k === key);
+    if (k === key) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+
+  if (!isHome) {
+    setActive(onCertPage ? 'certs' : onEventPage ? 'events' : null);
+    return;
+  }
+
+  // Home page: highlight the tab that matches the section in view
+  const projects = document.getElementById('projects');
+  const contact = document.getElementById('contact');
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const probe = window.scrollY + window.innerHeight * 0.4;
+    const top = (el) => el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    let key = null;
+    if (atBottom || probe >= top(contact)) key = 'contact';
+    else if (probe >= top(projects) && probe < top(document.getElementById('competitions') || contact)) key = 'projects';
+    else if (window.scrollY < window.innerHeight * 0.6) key = 'home';
+    setActive(key);
+  };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+}
+
+// Events page on mobile: the timeline is a swipeable chip row, start it at the latest event
+function initMobileEventsTimeline() {
+  const track = document.querySelector('.events-timeline-track');
+  if (!track || !isMobileViewport()) return;
+  requestAnimationFrame(() => { track.scrollLeft = track.scrollWidth; });
+}
 
 // Right-edge section rail: one dot per section, active highlight, counter, back-to-top
 function initSideRail() {
@@ -284,6 +370,7 @@ function initCustomCursor() {
 
 function initParticleField() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (isMobileViewport()) return; // save battery and keep scrolling smooth on phones
 
   const canvas = document.createElement('canvas');
   canvas.className = 'fx-canvas';
@@ -574,12 +661,24 @@ function initEventImageLightbox() {
   const lightbox = ensureEventImageLightbox();
   const lightboxImage = lightbox.querySelector('img');
   const lightboxClose = lightbox.querySelector('.event-image-lightbox-close');
+  const counter = lightbox.querySelector('.event-image-lightbox-counter');
+  const prevBtn = lightbox.querySelector('.event-image-lightbox-prev');
+  const nextBtn = lightbox.querySelector('.event-image-lightbox-next');
+  const images = Array.from(eventImages);
+  let current = 0;
 
-  eventImages.forEach((img) => {
+  const show = (index) => {
+    current = (index + images.length) % images.length;
+    const img = images[current];
+    lightboxImage.src = img.currentSrc || img.src;
+    lightboxImage.alt = img.alt || 'Event image';
+    counter.textContent = `${current + 1} / ${images.length}`;
+  };
+
+  images.forEach((img, i) => {
     img.classList.add('clickable-event-image');
     img.addEventListener('click', () => {
-      lightboxImage.src = img.currentSrc || img.src;
-      lightboxImage.alt = img.alt || 'Event image';
+      show(i);
       lightbox.classList.add('visible');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -590,16 +689,47 @@ function initEventImageLightbox() {
     lightbox.classList.remove('visible');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lightboxImage.style.transform = '';
   };
 
-  lightbox.addEventListener('click', closeLightbox);
-
+  // Tap the backdrop (not the photo or controls) to close
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   lightboxClose?.addEventListener('click', closeLightbox);
+  prevBtn?.addEventListener('click', () => show(current - 1));
+  nextBtn?.addEventListener('click', () => show(current + 1));
+  if (images.length < 2) { prevBtn.hidden = true; nextBtn.hidden = true; }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
-      closeLightbox();
-    }
+    if (!lightbox.classList.contains('visible')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') show(current - 1);
+    else if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Touch: swipe left/right to browse, swipe down to close
+  let startX = 0, startY = 0, dx = 0, dy = 0, tracking = false;
+  lightbox.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    tracking = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dx = dy = 0;
+    lightboxImage.style.transition = 'none';
+  }, { passive: true });
+  lightbox.addEventListener('touchmove', (e) => {
+    if (!tracking) return;
+    dx = e.touches[0].clientX - startX;
+    dy = e.touches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy)) lightboxImage.style.transform = `translateX(${dx}px)`;
+    else if (dy > 0) lightboxImage.style.transform = `translateY(${dy}px) scale(${Math.max(0.85, 1 - dy / 1200)})`;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', () => {
+    if (!tracking) return;
+    tracking = false;
+    lightboxImage.style.transition = '';
+    lightboxImage.style.transform = '';
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+    else if (dy > 90 && dy > Math.abs(dx)) closeLightbox();
   });
 }
 
@@ -621,7 +751,26 @@ function ensureEventImageLightbox() {
   closeButton.setAttribute('aria-label', 'Close image preview');
   closeButton.textContent = '✕';
 
+  const prev = document.createElement('button');
+  prev.className = 'event-image-lightbox-nav event-image-lightbox-prev';
+  prev.type = 'button';
+  prev.setAttribute('aria-label', 'Previous photo');
+  prev.textContent = '‹';
+
+  const next = document.createElement('button');
+  next.className = 'event-image-lightbox-nav event-image-lightbox-next';
+  next.type = 'button';
+  next.setAttribute('aria-label', 'Next photo');
+  next.textContent = '›';
+
+  const counter = document.createElement('div');
+  counter.className = 'event-image-lightbox-counter';
+  counter.setAttribute('aria-live', 'polite');
+
   lightbox.appendChild(image);
+  lightbox.appendChild(prev);
+  lightbox.appendChild(next);
+  lightbox.appendChild(counter);
   lightbox.appendChild(closeButton);
   document.body.appendChild(lightbox);
 
